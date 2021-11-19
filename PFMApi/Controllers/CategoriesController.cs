@@ -1,11 +1,19 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TinyCsvParser;
+using TinyCsvParser.Mapping;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PFMApi.Database.Entity.TransactionsE;
 using PFMApi.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using PFMApi.Helpers;
+using PFMApi.Dto;
+using PFMApi.Helpers.Params;
 
 namespace PFMApi.Controllers
 {

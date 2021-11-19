@@ -1,16 +1,21 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using PFMApi.Database.Contracts;
-using PFMApi.Database.Entity.CategoriesE;
+﻿using PFMApi.Database.Contracts;
+using PFMApi.Database.Entity;
+using PFMApi.Dto;
 using PFMApi.Helpers;
 using PFMApi.Services.Contracts;
-using System;
+using AutoMapper;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using TinyCsvParser;
+using System.IO;
+using System.Text;
+using PFMApi.Database.Entity.TransactionsE;
+using PFMApi.Helpers.Params;
+using System;
+using PFMApi.Database.Repositories;
+using PFMApi.Database.Entity.CategoriesE;
 
 namespace PFMApi.Services
 {
@@ -18,7 +23,7 @@ namespace PFMApi.Services
     {
         private readonly IRepository<Categories> _categoriesRepository;
 
-        public CategoriesService(IRepository<Categories> categoriesRepository, IMapper mapper)
+        public CategoriesService(IRepository<Categories> categoriesRepository)
         {
             _categoriesRepository = categoriesRepository;
         }
@@ -41,7 +46,7 @@ namespace PFMApi.Services
             result.Remove(result[result.Count - 1]);
 
             List<Categories> list = new List<Categories>();
-            for (int i = 3; i < result.Count; i++)
+            for (int i = 0; i < result.Count; i++)
             {
                 Categories dataForDb = new Categories
                 {

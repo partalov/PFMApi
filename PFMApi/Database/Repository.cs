@@ -10,7 +10,7 @@ namespace PFMApi.Database
         {
             private readonly AppDbContext _dbContext;
             private readonly DbSet<T> models;
-
+        
             public Repository(AppDbContext dbContext)
             {
             _dbContext = dbContext;

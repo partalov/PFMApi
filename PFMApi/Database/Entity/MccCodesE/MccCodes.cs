@@ -10,7 +10,7 @@ namespace PFMApi.Database.Entity.MccCodesE
     public class MccCodes
     {
         [Key]
-        public int Code { get; set; }
+        public int Coder { get; set; }
         public string MerchantType { get; set; }
     }   
 }
