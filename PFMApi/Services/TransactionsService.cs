@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 using TinyCsvParser;
 using System.IO;
 using System.Text;
-using PFMApi.Database.Entity.TransactionsE;
 using PFMApi.Helpers.Params;
 using System;
 using PFMApi.Database.Repositories;

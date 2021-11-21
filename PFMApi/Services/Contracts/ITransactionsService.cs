@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using PFMApi.Database.Entity.TransactionsE;
+using PFMApi.Database.Entity;
 using PFMApi.Dto;
 using PFMApi.Helpers;
 using PFMApi.Helpers.Params;

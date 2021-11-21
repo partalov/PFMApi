@@ -1,6 +1,6 @@
 ﻿namespace PFMApi.Database.Repositories
 {
-    public class ICategoriesRepository
+    public class ICategoryRepository
     {
     }
 }

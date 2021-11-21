@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PFMApi.Database.Contracts;
+using PFMApi.Database.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +24,20 @@ namespace PFMApi.Database
                 await models.AddAsync(entity);
             }
 
-            public async Task AddRange(ICollection<T> collection)
+        public void Update(T entity)
+        {
+            try
+            {
+                models.Update(entity);
+                
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task AddRange(ICollection<T> collection)
             {
                 await models.AddRangeAsync(collection);
             }
@@ -41,17 +56,27 @@ namespace PFMApi.Database
             {
                 return await models.FindAsync(id);
             }
+            public async Task<T> GetByCode(string code)
+            {
+                return await models.FindAsync(code);
+            }
 
-            public async Task<ICollection<T>> List()
+        public List<Categories> GetCategories()
+        {
+            var allCategories = _dbContext.Categories.ToList();
+            return allCategories;
+        }
+
+        public List<Categories> GetCategoriesByCode(string code)
+        {
+            var allCategories = _dbContext.Categories.Where(x => x.Code == code).ToList();
+            return allCategories;
+        }
+
+        public async Task<ICollection<T>> List()
             {
                 return await models.ToListAsync();
             }
-
-            public void Update(T entity)
-            {
-                models.Attach(entity).State = EntityState.Modified;
-            }
-
             public async Task<bool> SaveAll()
             {
 

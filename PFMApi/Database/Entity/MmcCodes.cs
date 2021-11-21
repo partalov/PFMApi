@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PFMApi.Database.Entity.MccCodesE
+namespace PFMApi.Database.Entity
 {
-    public class MccCodes
+    public class MmcCodes
     {
         [Key]
         public int Coder { get; set; }
         public string MerchantType { get; set; }
-    }   
+    }
 }

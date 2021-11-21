@@ -9,7 +9,7 @@ using TinyCsvParser.Mapping;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PFMApi.Database.Entity.TransactionsE;
+using PFMApi.Database.Entity;
 using PFMApi.Services.Contracts;
 using PFMApi.Helpers;
 using PFMApi.Dto;
@@ -60,5 +60,8 @@ namespace PFMApi.Controllers
 
             return Ok(_mapper.Map<List<TransactionsDto>>(status));
         }
+
+
+
     }
 }

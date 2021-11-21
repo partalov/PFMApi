@@ -1,7 +1,6 @@
 ﻿using PFMApi.Dto;
 using AutoMapper;
-using PFMApi.Database.Entity.TransactionsE;
-using PFMApi.Database.Entity.CategoriesE;
+using PFMApi.Database.Entity;
 
 namespace PFMApi.Helpers
 {

@@ -10,8 +10,8 @@ using PFMApi.Database;
 namespace PFMApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211119163714_init1")]
-    partial class init1
+    [Migration("20211120124106_init3")]
+    partial class init3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace PFMApi.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("PFMApi.Database.Entity.CategoriesE.Categories", b =>
+            modelBuilder.Entity("PFMApi.Database.Entity.Categories", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("text");
@@ -37,9 +37,9 @@ namespace PFMApi.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("PFMApi.Database.Entity.MccCodesE.MccCodes", b =>
+            modelBuilder.Entity("PFMApi.Database.Entity.MmcCodes", b =>
                 {
-                    b.Property<int>("Coder")
+                    b.Property<int>("Code")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -47,34 +47,12 @@ namespace PFMApi.Migrations
                     b.Property<string>("MerchantType")
                         .HasColumnType("text");
 
-                    b.HasKey("Coder");
+                    b.HasKey("Code");
 
                     b.ToTable("MccCodes");
                 });
 
-            modelBuilder.Entity("PFMApi.Database.Entity.SplitTransactionsE.SplitTransactions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("CategoriesCode")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TransactionId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoriesCode");
-
-                    b.HasIndex("TransactionId");
-
-                    b.ToTable("SplitTransactions");
-                });
-
-            modelBuilder.Entity("PFMApi.Database.Entity.TransactionsE.Transactions", b =>
+            modelBuilder.Entity("PFMApi.Database.Entity.Transactions", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -113,41 +91,9 @@ namespace PFMApi.Migrations
                     b.Property<int?>("Mcc")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("MccCodeCoder")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("isSplited")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MccCodeCoder");
-
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("PFMApi.Database.Entity.SplitTransactionsE.SplitTransactions", b =>
-                {
-                    b.HasOne("PFMApi.Database.Entity.CategoriesE.Categories", "Categories")
-                        .WithMany()
-                        .HasForeignKey("CategoriesCode");
-
-                    b.HasOne("PFMApi.Database.Entity.TransactionsE.Transactions", "Transactions")
-                        .WithMany()
-                        .HasForeignKey("TransactionId");
-
-                    b.Navigation("Categories");
-
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("PFMApi.Database.Entity.TransactionsE.Transactions", b =>
-                {
-                    b.HasOne("PFMApi.Database.Entity.MccCodesE.MccCodes", "MccCode")
-                        .WithMany()
-                        .HasForeignKey("MccCodeCoder");
-
-                    b.Navigation("MccCode");
                 });
 #pragma warning restore 612, 618
         }

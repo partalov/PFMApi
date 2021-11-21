@@ -11,11 +11,9 @@ using Microsoft.AspNetCore.Http;
 using TinyCsvParser;
 using System.IO;
 using System.Text;
-using PFMApi.Database.Entity.TransactionsE;
 using PFMApi.Helpers.Params;
 using System;
 using PFMApi.Database.Repositories;
-using PFMApi.Database.Entity.CategoriesE;
 
 namespace PFMApi.Services
 {
@@ -46,7 +44,8 @@ namespace PFMApi.Services
             result.Remove(result[result.Count - 1]);
 
             List<Categories> list = new List<Categories>();
-            for (int i = 0; i < result.Count; i++)
+            var resultFromRepo = false;
+            for (int i = 3; i < result.Count; i++)
             {
                 Categories dataForDb = new Categories
                 {
@@ -54,17 +53,38 @@ namespace PFMApi.Services
                     ParentCode = result[i].Result.ParentCode,
                     Name = result[i].Result.Name
                 };
-                list.Add(dataForDb);
+
+                var isExisting = _categoriesRepository.GetCategoriesByCode(result[i].Result.Code);
+
+                if (isExisting.Count > 0)
+                {
+                    if(dataForDb.ParentCode == isExisting.FirstOrDefault().ParentCode 
+                        && dataForDb.Name == isExisting.FirstOrDefault().Name)
+                    {
+                        //do nothing
+                    }
+                    else
+                    {
+                        _categoriesRepository.Update(dataForDb);
+                    }
+                }
+                else
+                {
+                    await _categoriesRepository.Add(dataForDb);
+                }
+
+                
+                resultFromRepo = await _categoriesRepository.SaveAll();
+
+                
             }
 
-            await _categoriesRepository.AddRange(list);
-            var resultFromRepo = await _categoriesRepository.SaveAll();
+            //await _categoriesRepository.AddRange(list);
+            //var resultFromRepo = await _categoriesRepository.SaveAll();
 
             if (resultFromRepo)
             {
-                // primer za return i poraka
-                //await $"Created Categories on server with name {dataForDb.Name}",
-                //    "With method: AddCategories ", user, ip, browser);
+                
                 return true;
             }
 

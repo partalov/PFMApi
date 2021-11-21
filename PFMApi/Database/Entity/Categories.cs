@@ -5,13 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PFMApi.Database.Entity.CategoriesE
+namespace PFMApi.Database.Entity
 {
     public class Categories
     {
         [Key]
         public string Code { get; set; }
-        public string? ParentCode { get; set; }
+        [Required]
+        public string ParentCode { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 }

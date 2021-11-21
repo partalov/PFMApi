@@ -7,14 +7,13 @@ using TinyCsvParser.Mapping;
 
 namespace PFMApi.Helpers
 {
-    public class CategoriesMappingModel : CsvMapping<Categories>
+    public class MmcMappingModel : CsvMapping<MmcCodes>
     {
-        public CategoriesMappingModel()
+        public MmcMappingModel()
        : base()
         {
-            MapProperty(0, m => m.Code);
-            MapProperty(1, m => m.ParentCode);
-            MapProperty(2, m => m.Name);
+            MapProperty(0, m => m.Coder);
+            MapProperty(1, m => m.MerchantType);
 
         }
     }
